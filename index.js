@@ -4,7 +4,7 @@ const yazl = require('yazl')
 
 module.exports = zipFolderSync
 
-if (process.argv) {
+if (process.argv.length > 2) {
   const args = process.argv.slice(2)
   const folder = path.join(__dirname, args[0])
   const outputFile = args[1] || 'output.zip'
