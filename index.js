@@ -16,8 +16,10 @@ if (process.argv.length > 2) {
   zipFolderSync(folder, outputFile, ignores)
 }
 
-
 function zipFolderSync (folder, outputFile, ignores) {
+  folder = path.resolve(folder)
+  outputFile = path.resolve(outputFile)
+
   const files = walkSync(folder)
   const zipfile = new yazl.ZipFile()
 

@@ -1,3 +1,8 @@
+# v1.0.4
+
+- resolve given paths into absolute paths so the program can be used from
+  any directory.
+
 # v1.0.3
 
 - make the function actually synch (!)
