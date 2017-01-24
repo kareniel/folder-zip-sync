@@ -1,15 +1,16 @@
 {
   "name": "folder-zip-sync",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "zip a folder synchronously",
   "main": "index.js",
   "dependencies": {
+    "deasync": "^0.1.9",
     "yazl": "^2.4.2"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test.js"
   },
   "keywords": [
     "aws"

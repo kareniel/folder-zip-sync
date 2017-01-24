@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const yazl = require('yazl')
+const deasync = require('deasync')
 
 module.exports = zipFolderSync
 
@@ -15,13 +16,17 @@ if (process.argv.length > 2) {
   zipFolderSync(folder, outputFile, ignores)
 }
 
+
 function zipFolderSync (folder, outputFile, ignores) {
   const files = walkSync(folder)
   const zipfile = new yazl.ZipFile()
 
+  let done = false
+
   zipfile
     .outputStream
-    .pipe(fs.createWriteStream('out/' + outputFile))
+    .pipe(fs.createWriteStream(outputFile))
+    .on('close', () => done = true)
 
   files.forEach(file => {
     const stat = fs.statSync(file)
@@ -29,6 +34,8 @@ function zipFolderSync (folder, outputFile, ignores) {
   })
 
   zipfile.end()
+
+  deasync.loopWhile(() => !done)
 }
 
 function walkSync (dir, done) {
