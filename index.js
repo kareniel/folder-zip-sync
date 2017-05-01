@@ -32,7 +32,12 @@ function zipFolderSync (folder, outputFile, ignores) {
 
   files.forEach(file => {
     const stat = fs.statSync(file)
-    zipfile.addFile(file, path.relative(folder, file))
+    if(stat.isDirectory()){
+      file = path.relative(folder, file);
+      zipfile.addEmptyDirectory(file, path.relative(folder, file))
+    }else{
+      zipfile.addFile(file, path.relative(folder, file))
+    }
   })
 
   zipfile.end()
@@ -48,11 +53,10 @@ function walkSync (dir, done) {
     const filepath = path.join(dir, file)
     const stat = fs.statSync(filepath)
 
+    results.push(filepath)
     if (stat.isDirectory()) {
       return results = results.concat(walkSync(filepath))
     }
-
-    results.push(filepath)
   })
 
   return results
