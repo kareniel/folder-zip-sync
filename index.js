@@ -5,17 +5,6 @@ const deasync = require('deasync')
 
 module.exports = zipFolderSync
 
-if (process.argv.length > 2) {
-  const args = process.argv.slice(2)
-  const folder = path.join(__dirname, args[0])
-  const outputFile = args[1] || 'output.zip'
-  const ignores = args.slice(2) || ['.git']
-
-  process.stdout.write(`Zipping ${outputFile}...`)
-
-  zipFolderSync(folder, outputFile, ignores)
-}
-
 function zipFolderSync (folder, outputFile, ignores) {
   folder = path.resolve(folder)
   outputFile = path.resolve(outputFile)

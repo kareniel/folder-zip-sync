@@ -3,6 +3,9 @@
   "version": "1.0.4",
   "description": "zip a folder synchronously",
   "main": "index.js",
+  "bin": {
+    "folder-zip-sync": "cli.js"
+  },
   "dependencies": {
     "deasync": "^0.1.9",
     "yazl": "^2.4.2"
