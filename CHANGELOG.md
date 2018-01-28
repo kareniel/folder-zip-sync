@@ -1,3 +1,9 @@
+# v1.0.5
+
+- include empty folders in zip
+- expose cli so that it can be called as a global module or dev dep
+- fix test
+
 # v1.0.4
 
 - resolve given paths into absolute paths so the program can be used from

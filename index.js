@@ -17,14 +17,17 @@ function zipFolderSync (folder, outputFile, ignores) {
   zipfile
     .outputStream
     .pipe(fs.createWriteStream(outputFile))
-    .on('close', () => done = true)
+    .on('close', function () {
+      done = true
+      return done
+    })
 
   files.forEach(file => {
     const stat = fs.statSync(file)
-    if(stat.isDirectory()){
-      file = path.relative(folder, file);
+    if (stat.isDirectory()) {
+      file = path.relative(folder, file)
       zipfile.addEmptyDirectory(file, path.relative(folder, file))
-    }else{
+    } else {
       zipfile.addFile(file, path.relative(folder, file))
     }
   })
@@ -44,7 +47,8 @@ function walkSync (dir, done) {
 
     results.push(filepath)
     if (stat.isDirectory()) {
-      return results = results.concat(walkSync(filepath))
+      results = results.concat(walkSync(filepath))
+      return results
     }
   })
 
